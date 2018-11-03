@@ -211,26 +211,7 @@ make3LGraph_2<-function(rmat,us,testSet,tr,perc=1){
   l=rbind(l,u)
   return(l);
 }
-ppr<-function(g, personalized=rep(1/vcount(g),vcount(g)),damping=0.85){
-  personalized=personalized/sum(personalized)
-  r=(get.adjacency(g));
-  e=(drop0(r))
-  p=colSums(e);
-  e=crossprod(r,solve(Diagonal(x=p)))
-  m=personalized
-  m=m/sum(m)
-  m=matrix(m,length(m),1)
-  er=rep(0,100)
-  l=which(personalized!=0)
-  for(i in 1:20){  
-    m2=damping*(e%*%m)+(1-damping)*personalized;
-    er[i]=sum((m-m2)^2);
-    m=m2
-    if(er[i]<0.000001)
-      break;
-  }
-  return(m)
-}
+
 #U-REGRank
 transformMatrix2_normallAll<-function(g,nr,nc){
   # p=array(list(),length(w)),
